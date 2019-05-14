@@ -1,6 +1,6 @@
 package com.galaxy.microservice.web.common;
 
-import com.galaxy.framework.exception.WebResCriteriaException;
+import com.galaxy.microservice.util.exception.WebResCriteriaException;
 import org.springframework.util.Assert;
 
 import java.util.HashMap;

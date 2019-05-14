@@ -1,8 +1,8 @@
 package com.galaxy.microservice.web.configuration;
 
 
-import com.galaxy.framework.exception.BusinessException;
-import com.galaxy.framework.exception.CoreExceptionCodes;
+import com.galaxy.microservice.util.exception.BusinessException;
+import com.galaxy.microservice.util.exception.CoreExceptionCodes;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

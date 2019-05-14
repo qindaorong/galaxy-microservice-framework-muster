@@ -5,13 +5,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 
-/**
- * okHttp配置信息
- *
- * @author LuCheng.Qi
- * @since 2018-07-18
- * Company:北京思源政务通有限公司
- */
 @Data
 @ConfigurationProperties("okhttp3")
 public class OkHttp3Properties {
