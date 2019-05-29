@@ -1,6 +1,5 @@
 package com.galaxy.microservice.util.util.codec;
 
-import com.galaxy.framework.exception.BusinessException;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
@@ -38,8 +37,9 @@ public class EncodeUtils {
 		try {
 			return Hex.decodeHex(input.toCharArray());
 		} catch (DecoderException e) {
-			throw new BusinessException(e);
+			e.printStackTrace();
 		}
+		return null;
 	}
 
 	/**
@@ -141,8 +141,9 @@ public class EncodeUtils {
 		try {
 			return URLEncoder.encode(part, encoding);
 		} catch (UnsupportedEncodingException e) {
-			throw new BusinessException(e);
+			e.printStackTrace();
 		}
+		return null;
 	}
 
 	/**
@@ -160,8 +161,9 @@ public class EncodeUtils {
 		try {
 			return URLDecoder.decode(part, encoding);
 		} catch (UnsupportedEncodingException e) {
-			throw new BusinessException(e);
+			e.printStackTrace();
 		}
+		return null;
 	}
 
 	/**

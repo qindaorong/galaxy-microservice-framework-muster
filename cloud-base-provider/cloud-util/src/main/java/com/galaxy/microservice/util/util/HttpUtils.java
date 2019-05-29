@@ -1,8 +1,8 @@
 package com.galaxy.microservice.util.util;
 
 
-import com.galaxy.framework.exception.BusinessException;
-import com.galaxy.framework.exception.CoreExceptionCodes;
+import com.galaxy.microservice.util.exception.BusinessException;
+import com.galaxy.microservice.util.exception.CoreExceptionCodes;
 import okhttp3.*;
 import okhttp3.FormBody.Builder;
 import org.apache.commons.lang3.StringUtils;
@@ -163,8 +163,9 @@ public class HttpUtils {
         try {
             return getHttpClient(request).newCall(request).execute();
         } catch (IOException e) {
-            throw new BusinessException(e);
+            e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -246,8 +247,9 @@ public class HttpUtils {
             verifySuccess(response.code());
             return response.body().string();
         } catch (IOException e) {
-            throw new BusinessException(e);
+           e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -286,8 +288,9 @@ public class HttpUtils {
             verifySuccess(response.code());
             return response.body().string();
         } catch (IOException e) {
-            throw new BusinessException(e);
+            e.printStackTrace();
         }
+        return null;
     }
 
     public static String syncFormPostString(String url, Headers headers, Map<String, String> body) {
@@ -300,8 +303,9 @@ public class HttpUtils {
             verifySuccess(response.code());
             return response.body().string();
         } catch (IOException e) {
-            throw new BusinessException(e);
+            e.printStackTrace();
         }
+        return null;
     }
 
     private static void verifySuccess(int code) {

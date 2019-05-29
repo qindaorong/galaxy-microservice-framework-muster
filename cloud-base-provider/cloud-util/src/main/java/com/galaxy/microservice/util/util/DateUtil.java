@@ -1,7 +1,7 @@
 package com.galaxy.microservice.util.util;
 
-import com.galaxy.framework.exception.BusinessException;
-import com.galaxy.framework.exception.CoreExceptionCodes;
+import com.galaxy.microservice.util.exception.BusinessException;
+import com.galaxy.microservice.util.exception.CoreExceptionCodes;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 

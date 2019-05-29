@@ -6,7 +6,8 @@
     + cloud-base-provider       【基础服务】
         + cloud-distribute-lock 【分布式锁】
         + cloud-log             【日志分析】
-        + cloud-orm             【数据持久层框架】
+        + cloud-orm-mysql       【mysql数据持久层框架】
+        + cloud-orm-redis       【redis数据持久层框架】
         + cloud-oss             【云存储】
         + cloud-swagger         【swagger服务】
         + cloud-util            【通用工具集合】

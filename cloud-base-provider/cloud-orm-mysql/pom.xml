@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.galaxy.microservice</groupId>
-    <artifactId>cloud-orm</artifactId>
+    <artifactId>cloud-orm-mysql</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
@@ -34,11 +34,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <!--redis-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
 

@@ -1,6 +1,6 @@
 package com.galaxy.microservice.util.util.codec;
 
-import com.galaxy.framework.exception.BusinessException;
+import com.galaxy.microservice.util.exception.BusinessException;
 import org.apache.commons.lang3.Validate;
 
 import java.io.IOException;

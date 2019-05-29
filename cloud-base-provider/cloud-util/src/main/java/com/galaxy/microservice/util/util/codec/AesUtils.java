@@ -1,7 +1,6 @@
 package com.galaxy.microservice.util.util.codec;
 
-
-import com.galaxy.framework.exception.BusinessException;
+import com.galaxy.microservice.util.exception.BusinessException;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
