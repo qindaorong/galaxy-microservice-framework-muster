@@ -1,4 +1,4 @@
-package com.galaxy.microservice.orm.eureka;
+package com.galaxy.microservice.eureka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
