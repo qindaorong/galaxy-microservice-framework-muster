@@ -1,6 +1,6 @@
 package com.galaxy.microservice.user.api.service.impl;
 
-import com.galaxy.microservice.user.api.service.RoleService;
+import com.galaxy.microservice.user.api.service.RoleServiceClient;
 import com.galaxy.microservice.user.api.vo.RoleVo;
 import com.galaxy.microservice.util.entity.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceClientImpl implements RoleServiceClient {
     @Override
     public ResponseResult<List<RoleVo>> getRoleByUserId(Integer userId) {
         log.info("调用{}失败","getRoleByUserId");

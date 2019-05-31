@@ -11,7 +11,6 @@ import java.util.Date;
 
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @TableName("sys_user")
 public class SysUser {
 

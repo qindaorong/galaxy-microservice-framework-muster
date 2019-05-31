@@ -1,32 +1,39 @@
 package com.galaxy.microservice.user.core.controller;
 
-import com.microservice.skeleton.common.vo.Result;
-import com.microservice.skeleton.upms.entity.SysRole;
-import com.microservice.skeleton.upms.service.RoleService;
+
+import com.galaxy.microservice.user.api.service.RoleServiceClient;
+import com.galaxy.microservice.user.api.vo.RoleVo;
+import com.galaxy.microservice.user.core.entity.SysRole;
+import com.galaxy.microservice.user.core.service.RoleService;
+import com.galaxy.microservice.util.entity.ResponseResult;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * Description:
- * User: Mr.Yangxiufeng
- * Date: 2018-06-13
- * Time: 10:27
- */
 @RestController
-@RequestMapping("role")
-public class RoleController {
+@RequestMapping("/role")
+public class RoleController implements RoleServiceClient {
     @Autowired
     private RoleService roleService;
-    @GetMapping("getRoleByUserId/{userId}")
-    public Result getRoleByUserId(@PathVariable("userId") Integer userId){
+
+    @Override
+    @GetMapping("/getRoleByUserId/{userId}")
+    public ResponseResult<List<RoleVo>> getRoleByUserId(@PathVariable("userId") Integer userId){
         List<SysRole> roleList = roleService.getRoleByUserId(userId);
-        return Result.ok().setData(roleList);
+        List<RoleVo> voList = new ArrayList<>();
+        RoleVo vo;
+        for(SysRole role : roleList){
+            vo = new RoleVo();
+            BeanUtils.copyProperties(role,vo);
+            voList.add(vo);
+        }
+        return ResponseResult.success(voList);
     }
 
 }

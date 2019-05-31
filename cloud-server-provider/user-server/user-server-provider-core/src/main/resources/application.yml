@@ -1,17 +1,7 @@
-# 端口号
-server:
-    port: 8790
-
 # 服务名称
 spring:
     application:
-        name: server-auth
-    redis:
-        host: 39.105.171.244
-        port: 6379
-        password: QMSc3F
-        database: 15
-        timeout: 3000
+        name: cloud-user-server
     datasource:
         minIdle: 1
         validationQuery: select 1 FROM DUAL
@@ -48,6 +38,20 @@ mybatis-plus:
         meta-object-handler: com.galaxy.microservice.orm.mysql.PublicFieldsHandler
         sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
 
+swagger:
+    info:
+        title: ${spring.application.name}
+        description: microservice-auth-server
+        version: v1.0.0
+        base-package: com.galaxy.microservice.gzt.controller
+        enable: true
+
+
+# 端口号
+server:
+    port: 8801
+
+
 # Eureka集群配置信息
 eureka:
     instance:
@@ -58,21 +62,3 @@ eureka:
     client:
         serviceUrl:
             defaultZone: http://127.0.0.1:8761/eureka/
-###feign 默认关闭熔断，请看HystrixFeignConfiguration
-feign:
-    hystrix:
-        enabled: true
-hystrix:
-    command:
-        default:
-            execution:
-                isolation:
-                    thread:
-                        timeoutInMilliseconds: 60000
-ribbon:
-    ReadTimeout: 30000
-    ConnectTimeout: 60000
-    MaxAutoRetries: 0
-    MaxAutoRetriesNextServer: 1
-
-

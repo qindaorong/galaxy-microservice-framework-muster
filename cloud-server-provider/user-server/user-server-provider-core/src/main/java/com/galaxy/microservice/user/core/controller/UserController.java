@@ -1,33 +1,35 @@
 package com.galaxy.microservice.user.core.controller;
 
-import com.microservice.skeleton.common.vo.Result;
-import com.microservice.skeleton.upms.entity.SysUser;
-import com.microservice.skeleton.upms.service.UserService;
+import com.galaxy.microservice.user.api.exceptions.UserExceptionCode;
+import com.galaxy.microservice.user.api.service.UserServiceClient;
+import com.galaxy.microservice.user.api.vo.UserVo;
+import com.galaxy.microservice.user.core.entity.SysUser;
+import com.galaxy.microservice.user.core.service.UserService;
+import com.galaxy.microservice.util.entity.ResponseResult;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created with IntelliJ IDEA.
- * Description:
- * User: Mr.Yangxiufeng
- * Date: 2018-06-13
- * Time: 10:27
- */
+
 @RestController
-@RequestMapping("user")
-public class UserController {
+@RequestMapping("/user")
+public class UserController implements UserServiceClient {
     @Autowired
     private UserService userService;
 
-    @GetMapping("findByUsername/{username}")
-    public Result findByUsername(@PathVariable("username") String username){
+    @Override
+    @GetMapping("/findByUsername/{username}")
+    public ResponseResult<UserVo> findByUsername(@PathVariable("username") String username){
         SysUser user = userService.findByUsername(username);
         if (user == null){
-            return Result.failure(100,"用户不存在");
+            return new ResponseResult(UserExceptionCode.USER_NOT_EXIST);
         }
-        return Result.ok().setData(user);
+        UserVo vo = new UserVo();
+        BeanUtils.copyProperties(user,vo);
+
+        return ResponseResult.success(vo);
     }
 }

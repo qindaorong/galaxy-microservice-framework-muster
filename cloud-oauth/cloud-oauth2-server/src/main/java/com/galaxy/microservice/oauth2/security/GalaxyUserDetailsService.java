@@ -1,56 +1,87 @@
 package com.galaxy.microservice.oauth2.security;
 
-import com.galaxy.microservice.oauth2.entity.Authority;
-import com.galaxy.microservice.oauth2.entity.User;
-import com.galaxy.microservice.oauth2.service.AuthorityService;
-import com.galaxy.microservice.oauth2.service.UserService;
+
+
+import com.galaxy.microservice.user.api.service.PermissionServiceClient;
+import com.galaxy.microservice.user.api.service.RoleServiceClient;
+import com.galaxy.microservice.user.api.service.UserServiceClient;
+import com.galaxy.microservice.user.api.vo.MenuVo;
+import com.galaxy.microservice.user.api.vo.RoleVo;
+import com.galaxy.microservice.user.api.vo.UserVo;
+import com.galaxy.microservice.util.entity.ResponseResult;
+import com.galaxy.microservice.util.exception.CoreExceptionCodes;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Service
 @Slf4j
 public class GalaxyUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
-
+    private UserServiceClient userServiceClient;
     @Autowired
-    private AuthorityService authorityService;
+    private RoleServiceClient roleServiceClient;
+    @Autowired
+    private PermissionServiceClient permissionServiceClient;
+
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(final String login) {
+    public UserDetails loadUserByUsername(final String username) {
 
-        String lowercaseLogin = login.toLowerCase();
-        log.debug("GalaxyUserDetailsService lowercaseLogin is [{}]!",lowercaseLogin);
-
-        User user = userService.findByUserMobileCaseInsensitive(lowercaseLogin);
-        if (user == null) {
-            //throw new BusinessException(FrameworkExceptionCode.UserCode.USER_INEXISTENCE);
+        ResponseResult<UserVo> userResult = userServiceClient.findByUsername(username);
+        if (Objects.equals(userResult.getMeta(),CoreExceptionCodes.SUCCESS)) {
+            throw new UsernameNotFoundException("用户:" + username + ",不存在!");
         }
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        // 可用性 :true:可用 false:不可用
+        boolean enabled = true;
+        // 过期性 :true:没过期 false:过期
+        boolean accountNonExpired = true;
+        // 有效性 :true:凭证有效 false:凭证无效
+        boolean credentialsNonExpired = true;
+        // 锁定性 :true:未锁定 false:已锁定
+        boolean accountNonLocked = true;
 
-        //获取用户的所有权限并且SpringSecurity需要的集合
-        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        List<Authority> authorityList = authorityService.findAuthorityByUserId(user.getId());
-        for (Authority authority : authorityList) {
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority.getName());
-            grantedAuthorities.add(grantedAuthority);
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(userResult.getData(),userVo);
+        ResponseResult<List<RoleVo>> roleResult = roleServiceClient.getRoleByUserId(userVo.getId());
+        if (Objects.equals(roleResult.getMeta(),CoreExceptionCodes.SUCCESS)){
+            List<RoleVo> roleVoList = roleResult.getData();
+            for (RoleVo role:roleVoList){
+                //角色必须是ROLE_开头，可以在数据库中设置
+                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_"+role.getValue());
+                grantedAuthorities.add(grantedAuthority);
+                //获取权限
+                ResponseResult<List<MenuVo>> perResult  = permissionServiceClient.getRolePermission(role.getId());
+                if (Objects.equals(perResult.getMeta(),CoreExceptionCodes.SUCCESS)){
+                    List<MenuVo> permissionList = perResult.getData();
+                    for (MenuVo menu:permissionList
+                    ) {
+                        GrantedAuthority authority = new SimpleGrantedAuthority(menu.getCode());
+                        grantedAuthorities.add(authority);
+                    }
+                }
+            }
         }
+        org.springframework.security.core.userdetails.User user = new User(userVo.getUsername(), userVo.getPassword(),
+                enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuthorities);
 
-        //返回一个SpringSecurity需要的用户对象
-        return new org.springframework.security.core.userdetails.User( user.getMobile(),
-                user.getPassword(),
-                grantedAuthorities);
+        return user;
     }
 
 

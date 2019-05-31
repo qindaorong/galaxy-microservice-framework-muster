@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -29,44 +29,49 @@ import javax.sql.DataSource;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-    @Autowired
-    private DataSource dataSource;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private RedisConnectionFactory redisConnectionFactory;
-
+    private DataSource dataSource;
     @Autowired
     private GalaxyUserDetailsService userDetailsService;
 
-    @Bean
-    public ClientDetailsService clientDetails() {
-        return new JdbcClientDetailsService(dataSource);
-    }
+    @Autowired
+    private RedisConnectionFactory redisConnectionFactory;
 
     @Bean
     RedisTokenStore redisTokenStore(){
         return new RedisTokenStore(redisConnectionFactory);
     }
 
-    @Bean
-    public WebResponseExceptionTranslator webResponseExceptionTranslator(){
-        return new GalaxyWebResponseExceptionTranslator();
-    }
-
+    //token存储数据库
+//    @Bean
+//    public JdbcTokenStore jdbcTokenStore(){
+//        return new JdbcTokenStore(dataSource);
+//    }
 
     @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.withClientDetails(clientDetails());
+    }
+    @Bean
+    public ClientDetailsService clientDetails() {
+        return new JdbcClientDetailsService(dataSource);
+    }
+    @Bean
+    public WebResponseExceptionTranslator<OAuth2Exception> webResponseExceptionTranslator(){
+        return new GalaxyWebResponseExceptionTranslator();
+    }
+    @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-
         endpoints.tokenStore(redisTokenStore())
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager);
         endpoints.tokenServices(defaultTokenServices());
         endpoints.exceptionTranslator(webResponseExceptionTranslator());//认证异常翻译
     }
-
 
     /**
      * <p>注意，自定义TokenServices的时候，需要设置@Primary，否则报错，</p>
@@ -84,25 +89,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return tokenServices;
     }
 
-
-
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security
-                .tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()");
+        security.tokenKeyAccess("permitAll()");
+        security .checkTokenAccess("isAuthenticated()");
+        security.allowFormAuthenticationForClients();
     }
 
-/*    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("galaxy")
-                .scopes("xx")
-                .secret("galaxy")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-            .and()
-                .withClient("webapp")
-                .scopes("xx")
-                .authorizedGrantTypes("implicit");
-    }*/
+    public static void main(String[] args) {
+       String str = new BCryptPasswordEncoder().encode("123456");
+        System.out.println("str="+str  );
+    }
+
 }

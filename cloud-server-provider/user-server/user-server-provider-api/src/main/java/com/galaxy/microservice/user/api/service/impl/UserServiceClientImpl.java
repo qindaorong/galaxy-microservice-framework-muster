@@ -1,6 +1,6 @@
 package com.galaxy.microservice.user.api.service.impl;
 
-import com.galaxy.microservice.user.api.service.UserService;
+import com.galaxy.microservice.user.api.service.UserServiceClient;
 import com.galaxy.microservice.user.api.vo.UserVo;
 import com.galaxy.microservice.util.entity.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class UserServiceImpl implements UserService {
+public class UserServiceClientImpl implements UserServiceClient {
     @Override
     public ResponseResult<UserVo> findByUsername(String username) {
         log.info("调用{}失败","findByUsername");

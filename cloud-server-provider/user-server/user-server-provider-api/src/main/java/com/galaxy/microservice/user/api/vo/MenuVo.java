@@ -1,6 +1,5 @@
 package com.galaxy.microservice.user.api.vo;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,7 +12,6 @@ import java.util.Date;
  * Time: 10:39
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MenuVo {
     private Integer id;
     private String code;

@@ -17,9 +17,15 @@
         <microservice.web.version>1.0.0</microservice.web.version>
         <microservice.orm.mysql.version>1.0.0</microservice.orm.mysql.version>
         <microservice.user.api.version>1.0.0</microservice.user.api.version>
+        <microservice.cloud.swagger.version>1.0.0</microservice.cloud.swagger.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.galaxy.microservice</groupId>
+            <artifactId>cloud-swagger</artifactId>
+            <version>${microservice.cloud.swagger.version}</version>
+        </dependency>
         <!--api-->
         <dependency>
             <groupId>com.galaxy.microservice</groupId>
@@ -55,6 +61,11 @@
             <artifactId>cloud-util</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
+        </dependency>
+        <!-- 选用eureka时打开-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>

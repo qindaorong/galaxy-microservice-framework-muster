@@ -1,6 +1,5 @@
 package com.galaxy.microservice.user.api.vo;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,7 +13,6 @@ import java.util.Date;
  * Time: 21:00
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserVo implements Serializable {
     private static final long serialVersionUID = 3881610071550902762L;
 
