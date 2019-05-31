@@ -1,16 +1,18 @@
-package com.galaxy.microservice.user.api.service;
+package com.galaxy.microservice.user.api.remote;
 
-
-import com.galaxy.microservice.user.api.service.impl.UserServiceClientImpl;
 import com.galaxy.microservice.user.api.vo.UserVo;
 import com.galaxy.microservice.util.entity.ResponseResult;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+/**
+ * @ClassName： UserServiceFacade
+ * @Description
+ * @Author alan qin
+ * @Date 2019-05-31
+ **/
+public interface UserServiceFacade {
 
-@FeignClient(name = "cloud-user-server",fallback = UserServiceClientImpl.class)
-public interface UserServiceClient {
     @GetMapping("user/findByUsername/{username}")
     ResponseResult<UserVo> findByUsername(@PathVariable("username") String username);
 }

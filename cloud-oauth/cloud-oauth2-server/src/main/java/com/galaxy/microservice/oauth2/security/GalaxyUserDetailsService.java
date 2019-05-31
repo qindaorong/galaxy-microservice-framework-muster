@@ -1,10 +1,9 @@
 package com.galaxy.microservice.oauth2.security;
 
 
-
-import com.galaxy.microservice.user.api.service.PermissionServiceClient;
-import com.galaxy.microservice.user.api.service.RoleServiceClient;
-import com.galaxy.microservice.user.api.service.UserServiceClient;
+import com.galaxy.microservice.oauth2.service.PermissionServiceClient;
+import com.galaxy.microservice.oauth2.service.RoleServiceClient;
+import com.galaxy.microservice.oauth2.service.UserServiceClient;
 import com.galaxy.microservice.user.api.vo.MenuVo;
 import com.galaxy.microservice.user.api.vo.RoleVo;
 import com.galaxy.microservice.user.api.vo.UserVo;

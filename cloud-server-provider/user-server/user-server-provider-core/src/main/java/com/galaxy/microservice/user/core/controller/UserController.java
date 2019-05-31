@@ -1,7 +1,7 @@
 package com.galaxy.microservice.user.core.controller;
 
 import com.galaxy.microservice.user.api.exceptions.UserExceptionCode;
-import com.galaxy.microservice.user.api.service.UserServiceClient;
+import com.galaxy.microservice.user.api.remote.UserServiceFacade;
 import com.galaxy.microservice.user.api.vo.UserVo;
 import com.galaxy.microservice.user.core.entity.SysUser;
 import com.galaxy.microservice.user.core.service.UserService;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
-public class UserController implements UserServiceClient {
+public class UserController implements UserServiceFacade {
     @Autowired
     private UserService userService;
 

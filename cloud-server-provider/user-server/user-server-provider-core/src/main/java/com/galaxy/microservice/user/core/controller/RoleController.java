@@ -1,7 +1,6 @@
 package com.galaxy.microservice.user.core.controller;
 
-
-import com.galaxy.microservice.user.api.service.RoleServiceClient;
+import com.galaxy.microservice.user.api.remote.RoleServiceFacade;
 import com.galaxy.microservice.user.api.vo.RoleVo;
 import com.galaxy.microservice.user.core.entity.SysRole;
 import com.galaxy.microservice.user.core.service.RoleService;
@@ -18,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/role")
-public class RoleController implements RoleServiceClient {
+public class RoleController implements RoleServiceFacade {
     @Autowired
     private RoleService roleService;
 

@@ -29,7 +29,7 @@
             <version>${microservice.web.version}</version>
         </dependency>
         <!--user-api-->
-        <dependency>
+       <dependency>
             <groupId>com.galaxy.microservice</groupId>
             <artifactId>user-server-provider-api</artifactId>
             <version>${microservice.user.api.version}</version>

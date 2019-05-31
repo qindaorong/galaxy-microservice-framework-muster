@@ -1,11 +1,8 @@
 package com.galaxy.microservice.user.core.controller;
 
-
-import com.galaxy.microservice.user.api.service.PermissionServiceClient;
+import com.galaxy.microservice.user.api.remote.PermissionServiceFacade;
 import com.galaxy.microservice.user.api.vo.MenuVo;
-import com.galaxy.microservice.user.api.vo.RoleVo;
 import com.galaxy.microservice.user.core.entity.SysMenu;
-import com.galaxy.microservice.user.core.entity.SysRole;
 import com.galaxy.microservice.user.core.service.PermissionService;
 import com.galaxy.microservice.util.entity.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +20,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/permission")
-public class PermissionController implements PermissionServiceClient {
+public class PermissionController implements PermissionServiceFacade {
     @Autowired
     private PermissionService permissionService;
 

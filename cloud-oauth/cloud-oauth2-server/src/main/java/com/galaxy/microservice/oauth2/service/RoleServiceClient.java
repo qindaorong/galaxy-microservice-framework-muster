@@ -1,7 +1,8 @@
-package com.galaxy.microservice.user.api.service;
+package com.galaxy.microservice.oauth2.service;
 
 
-import com.galaxy.microservice.user.api.service.impl.RoleServiceClientImpl;
+import com.galaxy.microservice.oauth2.service.impl.RoleServiceClientImpl;
+import com.galaxy.microservice.user.api.remote.RoleServiceFacade;
 import com.galaxy.microservice.user.api.vo.RoleVo;
 import com.galaxy.microservice.util.entity.ResponseResult;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -17,7 +18,6 @@ import java.util.List;
  * ProjectName:Mirco-Service-Skeleton
  */
 @FeignClient(name = "cloud-user-server",fallback = RoleServiceClientImpl.class)
-public interface RoleServiceClient {
-    @GetMapping("role/getRoleByUserId/{userId}")
-    ResponseResult<List<RoleVo>> getRoleByUserId(@PathVariable("userId") Integer userId);
+public interface RoleServiceClient extends RoleServiceFacade {
+
 }
