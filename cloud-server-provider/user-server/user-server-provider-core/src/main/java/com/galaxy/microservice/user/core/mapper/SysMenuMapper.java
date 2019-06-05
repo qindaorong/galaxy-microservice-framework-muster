@@ -12,5 +12,5 @@ import java.util.List;
 @Mapper
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
     @Select(value = "select menu.* from sys_menu menu,sys_privilege p where menu.id=p.menu_id and p.role_id=#{roleId}")
-    List<SysMenu> getPermissionsByRoleId(Integer roleId);
+    List<SysMenu> getPermissionsByRoleId(Long roleId);
 }

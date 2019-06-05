@@ -12,5 +12,5 @@ import java.util.List;
  * Time: 10:12
  */
 public interface PermissionService {
-    List<SysMenu> getPermissionsByRoleId(Integer roleId);
+    List<SysMenu> getPermissionsByRoleId(Long roleId);
 }

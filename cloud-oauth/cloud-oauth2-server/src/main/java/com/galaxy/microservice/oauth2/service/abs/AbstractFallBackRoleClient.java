@@ -18,7 +18,7 @@ import java.util.List;
  **/
 public abstract class AbstractFallBackRoleClient implements RoleServiceClient {
     @Override
-    public ResponseResult<List<RoleVo>> getRoleByUserId(@PathVariable("userId") Integer userId){
+    public ResponseResult<List<RoleVo>> getRoleByUserId(Integer userId){
         return null;
     }
 }

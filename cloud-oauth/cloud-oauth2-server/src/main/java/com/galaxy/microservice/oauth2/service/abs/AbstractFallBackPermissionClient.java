@@ -16,7 +16,7 @@ import java.util.List;
  **/
 public abstract class AbstractFallBackPermissionClient implements PermissionServiceClient {
     @Override
-    public ResponseResult<List<MenuVo>> getRolePermission(@PathVariable("roleId") Integer roleId){
+    public ResponseResult<List<MenuVo>> getRolePermission(Long roleId){
         return null;
     }
 }

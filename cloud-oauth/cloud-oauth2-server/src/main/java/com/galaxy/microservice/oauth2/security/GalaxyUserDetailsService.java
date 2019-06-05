@@ -59,7 +59,7 @@ public class GalaxyUserDetailsService implements UserDetailsService {
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(userResult.getData(),userVo);
         ResponseResult<List<RoleVo>> roleResult = roleServiceClient.getRoleByUserId(userVo.getId());
-        if (Objects.equals(roleResult.getMeta(),CoreExceptionCodes.SUCCESS)){
+        if (Objects.equals(roleResult.getMeta().getCode(),CoreExceptionCodes.SUCCESS.getCode())){
             List<RoleVo> roleVoList = roleResult.getData();
             for (RoleVo role:roleVoList){
                 //角色必须是ROLE_开头，可以在数据库中设置
@@ -67,11 +67,9 @@ public class GalaxyUserDetailsService implements UserDetailsService {
                 grantedAuthorities.add(grantedAuthority);
                 //获取权限
                 ResponseResult<List<MenuVo>> perResult  = permissionServiceClient.getRolePermission(role.getId());
-                if (Objects.equals(perResult.getMeta(),CoreExceptionCodes.SUCCESS)){
+                if (Objects.equals(perResult.getMeta().getCode(),CoreExceptionCodes.SUCCESS.getCode())){
                     List<MenuVo> permissionList = perResult.getData();
-                    for (MenuVo menu:permissionList
-                    ) {
-                        GrantedAuthority authority = new SimpleGrantedAuthority(menu.getCode());
+                    for (MenuVo menu:permissionList) {GrantedAuthority authority = new SimpleGrantedAuthority(menu.getCode());
                         grantedAuthorities.add(authority);
                     }
                 }

@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface PermissionServiceFacade {
     @GetMapping("permission/getRolePermission/{roleId}")
-    ResponseResult<List<MenuVo>> getRolePermission(@PathVariable("roleId") Integer roleId);
+    ResponseResult<List<MenuVo>> getRolePermission(@PathVariable("roleId") Long roleId);
 }

@@ -1,0 +1,64 @@
+# 服务名称
+spring:
+    application:
+        name: cloud-order-server
+    datasource:
+        minIdle: 1
+        validationQuery: select 1 FROM DUAL
+        initialSize: 1
+        maxWait: 60000
+        filters: stat
+        poolPreparedStatements: true
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://127.0.0.1:3306/microservice_user_db?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+        username: root
+        password: mysql
+        testOnBorrow: false
+        maxOpenPreparedStatements: 20
+        testWhileIdle: true
+        druid:
+            filter:
+                stat:
+                    log-slow-sql: true
+            web-stat-filter:
+                url-pattern: /*
+            stat-view-servlet:
+                url-pattern: /druid/*
+        minEvictableIdleTimeMillis: 300000
+        timeBetweenEvictionRunsMillis: 60000
+        testOnReturn: false
+        driver-class-name: com.mysql.jdbc.Driver
+        maxActive: 20
+mybatis-plus:
+    mapper-locations: classpath:/mapper/*Mapper.xml
+    typeAliasesPackage: com.galaxy.microservice.order.core.entity
+    global-config:
+        logic-not-delete-value: 0
+        logic-delete-value: 1
+        meta-object-handler: com.galaxy.microservice.orm.mysql.PublicFieldsHandler
+        sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+
+swagger:
+    info:
+        title: ${spring.application.name}
+        description: microservice-order-server
+        version: v1.0.0
+        base-package: com.galaxy.microservice.order.core.controller
+        enable: true
+
+
+# 端口号
+server:
+    port: 8802
+
+
+# Eureka集群配置信息
+eureka:
+    instance:
+        prefer-ip-address: true
+        instance-id: ${spring.cloud.client.ip-address}:${server.port}
+        lease-renewal-interval-in-seconds: 5
+        lease-expiration-duration-in-seconds: 10
+    client:
+        serviceUrl:
+            defaultZone: http://127.0.0.1:8761/eureka/

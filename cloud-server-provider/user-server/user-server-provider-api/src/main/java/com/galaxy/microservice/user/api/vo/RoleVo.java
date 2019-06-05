@@ -15,7 +15,8 @@ import java.util.Date;
 @Data
 public class RoleVo implements Serializable {
     private static final long serialVersionUID = 2179037393108205286L;
-    private Integer id;
+
+    private long id;
 
     private String name;
 

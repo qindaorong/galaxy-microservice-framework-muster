@@ -22,6 +22,10 @@ zuul:
     routes:
         server-auth:
             sensitiveHeaders:
+        cloud-order-server:
+            path: /cloud-order-server/**
+            sensitiveHeaders:
+            serviceId: cloud-order-server
 
 security:
     oauth2:

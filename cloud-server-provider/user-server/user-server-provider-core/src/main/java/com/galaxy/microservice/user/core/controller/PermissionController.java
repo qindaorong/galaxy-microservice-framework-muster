@@ -26,7 +26,7 @@ public class PermissionController implements PermissionServiceFacade {
 
     @Override
     @GetMapping("/getRolePermission/{roleId}")
-    public ResponseResult<List<MenuVo>> getRolePermission(@PathVariable("roleId") Integer roleId){
+    public ResponseResult<List<MenuVo>> getRolePermission(@PathVariable("roleId") Long roleId){
         List<SysMenu> menuList = permissionService.getPermissionsByRoleId(roleId);
         List<MenuVo> voList = new ArrayList<>();
         MenuVo vo;

@@ -16,7 +16,7 @@ public class PermissionServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> i
     private SysMenuMapper menuMapper;
 
     @Override
-    public List<SysMenu> getPermissionsByRoleId(Integer roleId) {
+    public List<SysMenu> getPermissionsByRoleId(Long roleId) {
         return menuMapper.getPermissionsByRoleId(roleId);
     }
 }

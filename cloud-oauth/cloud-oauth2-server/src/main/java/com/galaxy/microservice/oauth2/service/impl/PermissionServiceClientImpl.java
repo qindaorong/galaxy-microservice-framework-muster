@@ -2,6 +2,7 @@ package com.galaxy.microservice.oauth2.service.impl;
 
 
 import com.galaxy.microservice.oauth2.service.PermissionServiceClient;
+import com.galaxy.microservice.oauth2.service.abs.AbstractFallBackPermissionClient;
 import com.galaxy.microservice.user.api.vo.MenuVo;
 import com.galaxy.microservice.util.entity.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
@@ -20,10 +21,10 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class PermissionServiceClientImpl implements PermissionServiceClient {
+public class PermissionServiceClientImpl extends AbstractFallBackPermissionClient {
 
     @Override
-    public ResponseResult<List<MenuVo>> getRolePermission(@PathVariable("roleId") Integer roleId){
+    public ResponseResult<List<MenuVo>> getRolePermission(Long roleId){
         log.info("调用{}失败","getRolePermission");
         return ResponseResult.fail(100,"调用getRolePermission接口失败");
     }
