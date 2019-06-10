@@ -1,0 +1,27 @@
+# 服务名称
+spring:
+    application:
+        name: gitconfig-provider
+    cloud:
+        config:
+            server:
+                git:
+                    uri: https://github.com/ityouknow/spring-cloud-starter/     # 配置git仓库的地址
+                    search-paths: config-repo                             # git仓库地址下的相对地址，可以配置多个，用,分割。
+                    username:                                             # git仓库的账号
+                    password:                                             # git仓库的密码
+
+# 端口号
+server:
+    port: 9001
+
+# Eureka集群配置信息
+eureka:
+    instance:
+        prefer-ip-address: true
+        instance-id: ${spring.cloud.client.ip-address}:${server.port}
+        lease-renewal-interval-in-seconds: 5
+        lease-expiration-duration-in-seconds: 10
+    client:
+        serviceUrl:
+            defaultZone: http://127.0.0.1:8761/eureka/
