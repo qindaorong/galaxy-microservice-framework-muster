@@ -11,14 +11,14 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableConfigServer
-public class CloudConfigServerApplication {
+public class GitConfigProviderApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = new SpringApplicationBuilder()
-				.sources(CloudConfigServerApplication.class)
-				.main(CloudConfigServerApplication.class)
+				.sources(GitConfigProviderApplication.class)
+				.main(GitConfigProviderApplication.class)
 				.run(args);
-		log.info("----UserServerApplication Start PID={}----", new CloudConfigServerApplication().toString());
+		log.info("----UserServerApplication Start PID={}----", new GitConfigProviderApplication().toString());
 		context.registerShutdownHook();
 	}
 }
