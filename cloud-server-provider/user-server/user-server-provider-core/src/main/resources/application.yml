@@ -2,6 +2,13 @@
 spring:
     application:
         name: cloud-user-server
+    zipkin:
+        base-url: http://localhost:9901
+        sender:
+            type: web
+        sleuth:
+            sampler:
+            percentage: 1.0
     datasource:
         minIdle: 1
         validationQuery: select 1 FROM DUAL
@@ -45,7 +52,6 @@ swagger:
         version: v1.0.0
         base-package: com.galaxy.microservice.gzt.controller
         enable: true
-
 
 # 端口号
 server:
