@@ -6,6 +6,17 @@
     + cloud-base-provider       【基础服务】
         + cloud-distribute-lock 【分布式锁】
         + cloud-log             【日志分析】
+        + cloud-mq              【mq功能集合】
+            + cloud-kafka       【kafka功能集合】
+                + kafka-consumer       【kafka-消费者模块】
+                + kafka-provider       【kafka-生产者模块】
+            + cloud-openApi     【openApi功能集合】
+            + cloud-rabbit      【rabbit功能集合】
+                + rabbit-consumer       【rabbit-消费者模块】
+                + rabbit-provider       【rabbit-生产者模块】
+            + cloud-rocket      【rocket功能集合】
+                + rocket-consumer       【rocket-消费者模块】
+                + rocket-provider       【rocket-生产者模块】
         + cloud-orm-mysql       【mysql数据持久层框架】
         + cloud-orm-redis       【redis数据持久层框架】
         + cloud-oss             【云存储】
