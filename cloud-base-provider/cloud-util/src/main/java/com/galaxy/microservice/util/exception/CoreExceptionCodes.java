@@ -127,4 +127,10 @@ public class CoreExceptionCodes implements Serializable{
     public static final CodeMessage CACHE_BEAN_FAIL = new CodeMessage(62000, "对象拷贝失败");
     /***************** 62段加密错误信息 end ***********************/
 
+    /**
+     * 微服务不在线,或者网络超时
+     */
+    public static final CodeMessage SERVICE_NOT_SURVIVAL = new CodeMessage(63000, "微服务不在线,或者网络超时");
+
+
 }
