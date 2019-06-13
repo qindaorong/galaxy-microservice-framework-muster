@@ -1,15 +1,10 @@
 package com.galaxy.microservice.rocket.provider.api.remote.fallback;
 
-import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.galaxy.microservice.rocket.provider.api.entity.MqMessageData;
 import com.galaxy.microservice.rocket.provider.api.model.dto.TpcMqMessageDto;
-import com.galaxy.microservice.rocket.provider.api.model.enums.MqSendTypeEnum;
 import com.galaxy.microservice.rocket.provider.api.remote.TpcMqMessageFeignApi;
 import com.galaxy.microservice.util.entity.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @ClassName： MqMessageFeignApiHystrix

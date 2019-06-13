@@ -1,7 +1,6 @@
 package com.galaxy.microservice.rocket.provider.api.remote;
 
 
-import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.galaxy.microservice.rocket.provider.api.model.dto.TpcMqMessageDto;
 import com.galaxy.microservice.rocket.provider.api.remote.fallback.TpcMqMessageFeignApiHystrix;
 import com.galaxy.microservice.util.entity.ResponseResult;

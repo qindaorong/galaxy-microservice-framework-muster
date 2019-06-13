@@ -1,7 +1,6 @@
 package com.galaxy.microservice.rocket.provider.api.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.galaxy.microservice.rocket.provider.api.entity.MqMessageData;
 import com.galaxy.microservice.rocket.provider.api.exceptions.TcpExceptionCode;
 import com.galaxy.microservice.rocket.provider.api.mapper.MqMessageDataMapper;

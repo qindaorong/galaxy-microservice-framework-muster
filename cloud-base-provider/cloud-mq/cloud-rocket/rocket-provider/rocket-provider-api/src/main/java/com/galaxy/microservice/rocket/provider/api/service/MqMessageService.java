@@ -1,6 +1,5 @@
 package com.galaxy.microservice.rocket.provider.api.service;
 
-
 import com.galaxy.microservice.rocket.provider.api.entity.MqMessageData;
 import com.galaxy.microservice.rocket.provider.api.model.dto.MessageQueryDto;
 import com.galaxy.microservice.rocket.provider.api.model.enums.MqSendTypeEnum;
