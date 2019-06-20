@@ -1,0 +1,14 @@
+server:
+    port: 8763
+
+spring:
+    application:
+        name: cloud-zk-client
+    cloud:
+        zookeeper:
+            connect-string: 192.168.100.15:2181
+            discovery:
+                register: true
+                enabled: true
+                instance-id: 1
+                root: /galaxy

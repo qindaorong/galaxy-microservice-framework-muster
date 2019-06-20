@@ -1,0 +1,13 @@
+server:
+    port: 8762
+
+spring:
+    application:
+        name: cloud-zk-server
+    cloud:
+        zookeeper:
+            connect-string: 192.168.100.15:2181
+            discovery:
+                register: true
+                enabled: true
+                root: /galaxy
