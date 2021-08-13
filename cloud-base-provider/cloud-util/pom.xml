@@ -21,7 +21,7 @@
         <commons-lang3-version>3.6</commons-lang3-version>
         <commons-io.version>2.4</commons-io.version>
         <commons-lang.version>2.6</commons-lang.version>
-        <jdk15on.version>1.59</jdk15on.version>
+        <jdk15on.version>1.67</jdk15on.version>
         <codehaus-jackson.version>1.9.13</codehaus-jackson.version>
     </properties>
 
